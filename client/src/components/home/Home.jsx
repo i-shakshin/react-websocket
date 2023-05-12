@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
-function Home({ socket }) {
+const Home = ({ socket }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
 
@@ -12,7 +13,7 @@ function Home({ socket }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <h2>Вход в чат</h2>
       <label htmlFor="user"></label>
       <input
@@ -20,10 +21,13 @@ function Home({ socket }) {
         id="user"
         value={user}
         onChange={(e) => setUser(e.target.value)}
+        className={styles.userInput}
       />
-      <button type="submit">Войти</button>
+      <button type="submit" className="homeBtn">
+        Войти
+      </button>
     </form>
   );
-}
+};
 
 export default Home;
