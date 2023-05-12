@@ -16,11 +16,17 @@ app.get("api", (req, res) => {
   });
 });
 
+const users = [];
+
 socketIo.on("connection", (socket) => {
   console.log(`${socket.id} user connected`);
   socket.on("message", (data) => {
     socketIo.emit("response", data);
     //console.log("message", data);
+  });
+  socket.on("newUser", (data) => {
+    users.push(data);
+    socketIo.emit("responseNewUser", users);
   });
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected`);
